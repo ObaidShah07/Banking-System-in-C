@@ -13,7 +13,7 @@ typedef struct{
     int acc_no;
     char a_no[11];
     enum type1 type;
-}data;
+}data_;
 
 void add_data(void);
 

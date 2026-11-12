@@ -18,7 +18,6 @@ typedef struct account_info{
 
 //function to create an account
 //doesnt return anything or take any parameters
-
 void add_data() {
     data_ temp;
     //storing data in the temp variable 
@@ -64,7 +63,7 @@ void add_data() {
 
     //storing the data in the file
     fseek(fle,0,SEEK_END);
-    fwrite(&temp,sizeof(data),1,fle);
+    fwrite(&temp,sizeof(data_),1,fle);
 
     printf("\nCongratulaitons your account has been created");
     printf("\nYour account number is %d", temp.acc_no);
@@ -96,13 +95,12 @@ long int search(int ano){
         fread(&temp,sizeof(temp),1,fle);
 
         if(temp.acc_no == ano){
-            fseek(fle,-(long)sizeof(data),SEEK_CUR);
+            fseek(fle,-(long)sizeof(data_),SEEK_CUR);
             long int loc = ftell(fle);
             fclose(fle);
             return loc;
         }
     }
-    
-    return 0;
+    return -1;
 }
 
