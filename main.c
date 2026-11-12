@@ -1,18 +1,21 @@
 #include<stdio.h>
 #include<conio.h>
+#include<stdlib.h>
 #include"data.h"
+#include"advfunc.h"
 
 int main() {
 
     while(1){
+        system("cls");
         printf("\n\tWELCOME TO THE BANK");
         printf("\n===================================");
 
         printf("\n1. Create an account");
-        printf("\n2. Search for an account");
-        printf("\n3. Deposite money");
+        printf("\n2. For modifying holder details");
+        printf("\n3. View the account info");
         printf("\n4. To exit the bank");
-        printf("\nEnter your choice");
+        printf("\nEnter your choice ");
 
         int choice;
         scanf("%d", &choice);
@@ -24,12 +27,11 @@ int main() {
             break;
         
         case 2:
-            printf("\nEnter your account number ");
-            int acc;
-            scanf("%d", &acc);
+            mod_data();
+            break;
 
-            long int n = search(acc);
-            printf("\nLocation of your data is: %ld", n);
+        case 3:
+            display();
             break;
 
         case 4:

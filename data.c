@@ -1,20 +1,9 @@
 #include<stdio.h>
 #include<conio.h>
+#include<string.h>
+#include<time.h>
 #include "data.h"
 
-enum type1{
-    savings =1,
-    current,
-};
-
-typedef struct account_info{
-    char name[50];
-    char ph_no[18];
-    long int balance;
-    int acc_no;
-    char a_no[11];
-    enum type1 type;
-}data_;
 
 //function to create an account
 //doesnt return anything or take any parameters
@@ -25,6 +14,9 @@ void add_data() {
 
     printf("\nEnter your name: ");
     fgets(temp.name,sizeof(temp.name),stdin);
+
+    printf("\nEnter your address: ");
+    fgets(temp.address,sizeof(temp.address),stdin);
 
     printf("\nEnter your phone number: ");
     scanf("%s", &temp.ph_no);
@@ -44,6 +36,15 @@ void add_data() {
         }
         printf("\nInvalid input you can try again");
     }
+    //To add time to the database as string
+    time_t time_c = time(NULL);
+    struct tm* time_s = localtime(&time_c);
+
+    char cur_t [20];
+    strftime(cur_t,sizeof(cur_t),"%d-%m-%Y",time_s);
+    strcpy(temp.time_ ,cur_t);
+    
+
     //case of inilitizing count 
     FILE* fle = fopen("data.txt","rb+");
     if(fle == NULL){

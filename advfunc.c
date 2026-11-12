@@ -1,7 +1,9 @@
 #include<stdio.h>
 #include<conio.h>
+#include<time.h>
 #include"data.h"
 
+//gcc main.c data.c advfunc.c -o trial
 void mod_data(){
     
     printf("\nEnter your account number ");
@@ -29,6 +31,7 @@ void mod_data(){
     printf("\n2. Phone number");
     printf("\n3. Aadhar number");
     printf("\n4. Account type");
+    printf("\n5. Address");
     printf("\nEnter your choice");
 
     int choice;
@@ -55,9 +58,16 @@ void mod_data(){
 
         case 4:
             getchar();
-            printf("\nEnter your new account type '1' for savigs '2' for currnt");
+            printf("\nEnter your new account type '1' for savigs '2' for currnt ");
             scanf("%d", &temp.type);
             break;
+
+        case 5:
+            getchar();
+            printf("\nEnter your new address ");
+            fgets(temp.address,50,stdin);
+            break;
+
         default:
             printf("\ninvalid inpout Try again");
             return;
@@ -72,4 +82,48 @@ void mod_data(){
     {
         printf("\nInformation updated successfully ");
     }
+    fclose(fle);
+    getch();
+}
+
+//funtion to display the record
+void display(){
+    printf("\nEnter your account number ");
+    int choice;
+    scanf("%d", &choice);
+
+    long int off = search(choice);
+    if(off == -1){
+        printf("\nNo such account exists");
+        return;
+    }
+    FILE* fle = fopen("data.txt","rb");
+    if(fle == NULL){
+        printf("\nFailed to open the file");
+        return;
+    }
+    fseek(fle,off,SEEK_SET);
+    data_ temp;
+    fread(&temp,sizeof(temp),1,fle);
+
+    printf("\nYOUR ACCOUNT");
+    printf("\nACCOUNT NUMBER:    %d",temp.acc_no);
+    printf("\nNAME:    %s",temp.name);
+    printf("\nADDRESS:    %s",temp.address);
+    printf("\nPHONE NUMBER:    %s",temp.ph_no);
+    printf("\nAADHAR NUMBER:    %s",temp.a_no);
+    printf("\nBALANCE:    %ld",temp.balance);
+
+    switch(temp.type){
+        case Savings:
+            printf("\nTYPE    Savings");
+            break;
+        case Current:
+            printf("\nTYPE    Current");
+            break;
+    }
+    printf("\nTIME OF CREATION:    %s",temp.time_);
+    getch();
+    
+    return;
 }
