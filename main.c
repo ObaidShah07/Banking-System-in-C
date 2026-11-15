@@ -4,6 +4,8 @@
 #include"data.h"
 #include"advfunc.h"
 
+//gcc main.c data.c advfunc.c -o trial
+
 int main() {
 
     while(1){
@@ -14,7 +16,9 @@ int main() {
         printf("\n1. Create an account");
         printf("\n2. For modifying holder details");
         printf("\n3. View the account info");
-        printf("\n4. To exit the bank");
+        printf("\n4. to deposite money");
+        printf("\n5. to withdraw money");
+        printf("\n6. To exit the bank");
         printf("\nEnter your choice ");
 
         int choice;
@@ -35,9 +39,21 @@ int main() {
             break;
 
         case 4:
+            deposite();
+            break;
+
+        case 5:
+            withdraw();
+            break;
+
+        case 6:
             printf("\nExiting the bank");
             getch();
             return 0;
+        
+        default:
+            printf("\nInvalid input ");
+            break;
         }
     }
     return 0;

@@ -18,4 +18,20 @@ void mod_data(void);
  */
 void display(void);
 
+/**
+ * @brief deposits money
+ * 
+ * @param void
+ * @return void
+ */
+void deposite(void);
+
+/**
+ * @brief withdraws money
+ * 
+ * @param void
+ * @return void
+ */
+void withdraw(void);
+
 #endif

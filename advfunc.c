@@ -3,7 +3,7 @@
 #include<time.h>
 #include"data.h"
 
-//gcc main.c data.c advfunc.c -o trial
+
 void mod_data(){
     
     printf("\nEnter your account number ");
@@ -95,6 +95,7 @@ void display(){
     long int off = search(choice);
     if(off == -1){
         printf("\nNo such account exists");
+        getch();
         return;
     }
     FILE* fle = fopen("data.txt","rb");
@@ -126,4 +127,70 @@ void display(){
     getch();
     
     return;
+}
+
+//funciton to deposite money 
+void deposite(){
+    printf("\nEnter your account number ");
+    int ac;
+    scanf("%d", &ac);
+
+    long int acno = search(ac);
+    if(ac == -1){
+        printf("\nNo such account exits");
+        return;
+    }
+    FILE* fle = fopen("data.txt","rb+");
+    if(fle == NULL){
+        printf("\nfailed to open the file");
+        return;
+    }
+    fseek(fle,acno,SEEK_SET);
+    data_ temp;
+    fread(&temp,sizeof(temp),1,fle);
+    printf("\nCurrent balance: %ld",temp.balance);
+    printf("\nEnter the amount you wnat to deposite ");
+
+    long int amount;
+    scanf("%ld", &amount);
+
+    temp.balance = temp.balance + amount;
+    fseek(fle,acno,SEEK_SET);
+    fwrite(&temp,sizeof(temp),1,fle);
+    fclose(fle);
+
+    printf("\nMoney deposited successfully");
+}
+
+//withdrawing money
+void withdraw(){
+    printf("\nEnter your account number ");
+    int ac;
+    scanf("%d", &ac);
+
+    long int acno = search(ac);
+    if(ac == -1){
+        printf("\nNo such account exits");
+        return;
+    }
+    FILE* fle = fopen("data.txt","rb+");
+    if(fle == NULL){
+        printf("\nfailed to open the file");
+        return;
+    }
+    fseek(fle,acno,SEEK_SET);
+    data_ temp;
+    fread(&temp,sizeof(temp),1,fle);
+    printf("\nCurrent balance: %ld",temp.balance);
+    printf("\nEnter the amount you wnat to withdraw ");
+
+    long int amount;
+    scanf("%ld", &amount);
+
+    temp.balance = temp.balance - amount;
+    fseek(fle,acno,SEEK_SET);
+    fwrite(&temp,sizeof(temp),1,fle);
+
+    fclose(fle);
+    printf("\nMoney withdrawed successfully");
 }
